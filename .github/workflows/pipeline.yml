@@ -29,14 +29,12 @@ jobs:
       - name: Test e2e
         run: npm run test:e2e
       - name: Build failure
-        if: ${{ failure() }}
+        if: failure()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{
-            "title": "Build failed",
-            "color": "red"
-            }]'
-        uses: "Ilshidur/action-discord@ad5235de713df3ef38022185499b02ffe93b7efe"
+        uses: Ilshidur/action-discord@0.4.0
+        with:
+          args: Build failed on commit https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/commit/${{ github.sha }} 
         
 
   deploy:
@@ -47,15 +45,12 @@ jobs:
       - name: Deploy on Render with curl
         run: curl -X POST "https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}"
       - name: Deploy success
-        if: ${{ success() }}
+        if: success()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{
-            "title": "Deploy successful", 
-            "description": "New version released at https://fullstackopen-cicd.onrender.com/", 
-            "color": "green"
-            }]'
-        uses: "Ilshidur/action-discord@ad5235de713df3ef38022185499b02ffe93b7efe"
+        uses: Ilshidur/action-discord@0.4.0
+        with:
+          args: New version deployed to https://fullstackopen-cicd.onrender.com/
      
   tag_release:
     needs: [deploy]
