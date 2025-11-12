@@ -1,0 +1,9 @@
+ESLint is the most popular option for linting in JavaScript and TypeScript. Its rules are user-defined in a file called .eslintrc, and you run it from the command line. Another typical option is Prettier which can be easily integrated into your IDE of choice. Prettier is not really a conventional linting tool though, as it enforces its own rules, so it's a bit more narrow-scoped and opinionated compared to ESLint. ESLint is used for catching code-quality and type-related issues, while Prettier handles mostly just code formatting. 
+
+Jest and Vitest are popular options for unit and integration testing in JS and TS. End-to-end testing can be handled by Cypress, Playwright or even by your frontend framework's own testing library.
+
+Building tools take care of minimizing the space the code takes, optimizing the code, and more. Some examples include Vite and Webpack. TypeScript itself handles transpiling in many setups, but Babel or newer transpilers like SWC are often used for additional optimization and compatibility.
+
+Besides using Jenkins, you can usually set up the CI pipeline directly in your repository host of choice, like GitHub, GitLab or Bitbucket. Typically you configure these with a .yml file in your repository. Separate, non-integrated CI platforms include Semaphore and Travis CI.
+
+Most of the CI platforms are cloud-hosted, unlike the self-hosted Jenkins. These self-hosted CI platforms offer more customizability over the pipeline's setup, while cloud-based platforms are usually easier to configure and scale. Collaboration might be more straightforward on a cloud-hosted platform as well, especially if it's already integrated with the repository host. For a larger project, budget might be a constraint when considering the more expensive cloud options.
