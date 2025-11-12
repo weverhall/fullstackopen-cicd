@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  verify_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
         run: npm run test:e2e
         
   deploy:
-    needs: [simple_deployment_pipeline]
+    needs: [verify_build]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy on Render with curl
@@ -41,6 +41,8 @@ jobs:
     needs: [deploy]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.75.0
         env:
